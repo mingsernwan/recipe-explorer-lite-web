@@ -1,7 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
-import { Loader } from "lucide-react";
+import { Loader, PencilIcon } from "lucide-react";
 
 export function FeedbackList() {
   const { data, isLoading, isError } = useQuery<FeedbackListDTO[]>({
@@ -32,6 +33,7 @@ export function FeedbackList() {
             <th className="px-3 py-2 border">Email</th>
             <th className="px-3 py-2 border">Remarks</th>
             <th className="px-3 py-2 border">Created At</th>
+            <th className="px-3 py-2 border">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +45,11 @@ export function FeedbackList() {
               <td className="px-3 py-2 border">{feedback.remarks}</td>
               <td className="px-3 py-2 border">
                 {new Date(feedback.createdAt).toLocaleString()}
+              </td>
+              <td className="px-3 py-2 border flex justify-center">
+                <Button type="button" variant="icon" size="icon">
+                  <PencilIcon className="size-5" />
+                </Button>
               </td>
             </tr>
           ))}
