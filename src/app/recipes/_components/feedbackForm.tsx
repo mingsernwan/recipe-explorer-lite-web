@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
@@ -38,15 +39,16 @@ export function FeedbackForm() {
           <p className="text-xl font-semibold">Feedback</p>
           <p className="text-sm italic">We&apos;d love to hear from you!</p>
         </div>
-        <button
+        <Button
           type="button"
-          className="rounded-sm border border-solid items-center flex p-1 cursor-pointer size-8"
+          variant="icon"
+          size="icon"
           onClick={() => {
             router.back();
           }}
         >
           <XIcon className="size-5" />
-        </button>
+        </Button>
       </div>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
         <Input
@@ -83,13 +85,14 @@ export function FeedbackForm() {
           }
         />
         <div className="w-full justify-end flex">
-          <button
+          <Button
+            variant="icon"
+            size="iconText"
             type="submit"
-            className="rounded-sm border border-solid items-center flex py-2 px-4 cursor-pointer"
-            disabled={mutation.isPending}
+            isLoading={mutation.isPending}
           >
             Submit
-          </button>
+          </Button>
         </div>
       </div>
     </form>
