@@ -2,14 +2,37 @@
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useMutation } from "@tanstack/react-query";
 import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function FeedbackForm() {
   const router = useRouter();
+  const [details, setDetails] = useState({ name: "", email: "", remarks: "" });
+  const mutation = useMutation({
+    mutationFn: async (data: typeof details) => {
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("Failed to submit feedback");
+      return res.json();
+    },
+    onSuccess: () => {
+      alert("Thank you for your feedback!");
+      router.back();
+    },
+  });
 
   return (
-    <div className="">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        mutation.mutate(details);
+      }}
+    >
       <div className="flex flex-row justify-between">
         <div className="">
           <p className="text-xl font-semibold">Feedback</p>
@@ -25,19 +48,50 @@ export function FeedbackForm() {
           <XIcon className="size-5" />
         </button>
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-4 items-end">
-        <Input name="name" label="Name" />
-        <Input name="email" label="Email Address" />
-        <Textarea name="remarksFeedback" label="Remarks/Feedback" />
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
+        <Input
+          name="name"
+          label="Name"
+          value={details.name ?? ""}
+          onChange={(e) =>
+            setDetails((prevValue) => ({
+              ...prevValue,
+              name: e.target.value,
+            }))
+          }
+        />
+        <Input
+          name="email"
+          label="Email Address"
+          value={details.email ?? ""}
+          onChange={(e) =>
+            setDetails((prevValue) => ({
+              ...prevValue,
+              email: e.target.value,
+            }))
+          }
+        />
+        <Textarea
+          name="remarksFeedback"
+          label="Remarks/Feedback"
+          value={details.remarks ?? ""}
+          onChange={(e) =>
+            setDetails((prevValue) => ({
+              ...prevValue,
+              remarks: e.target.value,
+            }))
+          }
+        />
         <div className="w-full justify-end flex">
           <button
-            type="button"
+            type="submit"
             className="rounded-sm border border-solid items-center flex py-2 px-4 cursor-pointer"
+            disabled={mutation.isPending}
           >
             Submit
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
