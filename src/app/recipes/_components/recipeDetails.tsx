@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 
 const fetchMealDetails = async ({ idMeal }: { idMeal: string }) => {
@@ -46,7 +47,7 @@ export function RecipeDetails() {
   return (
     <div className="mt-4">
       <picture>
-        <img src={details.strMealThumb} alt="" className="size-80" />
+        <img src={details.strMealThumb} alt="" className="size-80 rounded-lg" />
       </picture>
       <p className="mt-2 text-lg font-semibold underline">{details.strMeal}</p>
       <p className="mt-2 font-semibold">Category:</p>
@@ -60,6 +61,13 @@ export function RecipeDetails() {
         {details.strIngredient1}, {details.strIngredient2},{" "}
         {details.strIngredient3}
       </p>
+      <p className="mt-8 font-semibold">Got thoughts? Share it with us!</p>
+      <Link
+        href={`/recipes/details/${details.idMeal}/feedback`}
+        className="cursor-pointer text-blue-600 underline"
+      >
+        Send Feedback
+      </Link>
     </div>
   );
 }

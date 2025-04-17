@@ -4,7 +4,7 @@ import { XIcon } from "lucide-react";
 
 export default function Page() {
   return (
-    <div className="p-4 sm:p-10">
+    <div className="">
       <div className="flex flex-row justify-between">
         <p className="text-xl font-semibold">List of Recipes</p>
         <Link

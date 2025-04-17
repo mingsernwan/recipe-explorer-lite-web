@@ -4,7 +4,7 @@ import { RecipeDetails } from "../../_components/recipeDetails";
 
 export default function Page() {
   return (
-    <div className="p-4 sm:p-10">
+    <div className="">
       <div className="flex flex-row justify-between">
         <p className="text-xl font-semibold">Recipe Details</p>
         <Link

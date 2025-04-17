@@ -1,21 +1,61 @@
-import * as React from "react"
+import { cn } from "@/lib/utils";
+import { LoaderIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+type Props = {
+  title?: string;
+  name?: string;
+  label?: string;
+  error?: string;
+  required?: boolean;
+  loading?: boolean;
+};
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+export function Input(
+  props: Props &
+    React.DetailedHTMLProps<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      HTMLInputElement
+    >
+) {
+  const { label, loading, ...rest } = props;
+  const titleText = props.title ?? props.label;
+
   return (
-    <input
-      type={type}
-      data-slot="input"
-      className={cn(
-        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-        className
+    <div>
+      {props.label && (
+        <label
+          htmlFor={`${label}-input`}
+          className="flex text-sm leading-none text-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-1.5"
+        >
+          {props.label}
+          {props.required && <span className="text-destructive">&nbsp;*</span>}
+        </label>
       )}
-      {...props}
-    />
-  )
+      <div className="relative">
+        {loading ? (
+          <div className="relative flex flex-col items-center">
+            <div className="w-full">
+              <Input disabled />
+            </div>
+            <LoaderIcon
+              className={`absolute top-2 size-5 animate-spin text-gray-400`}
+            />
+          </div>
+        ) : (
+          <input
+            {...rest}
+            className={cn(
+              "block h-[30px] w-full rounded border py-1 pl-2 focus:border-slate-500 focus:outline-hidden focus:ring-slate-500 dark:border-slate-600 dark:bg-slate-800",
+              props.error
+                ? "border-red-300 pr-10 text-destructive"
+                : "border-gray-300 pr-2 text-foreground",
+              props.className
+            )}
+            id={`${props.name}-input`}
+            title={titleText}
+          />
+        )}
+      </div>
+    </div>
+  );
 }
-
-export { Input }
