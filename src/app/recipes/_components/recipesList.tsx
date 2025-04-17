@@ -18,7 +18,6 @@ export function RecipesList() {
     queryKey: ["meals"],
     queryFn: fetchMeals,
   });
-  console.log("======\n\n", data, "\n\n======");
 
   if (isLoading)
     return (
