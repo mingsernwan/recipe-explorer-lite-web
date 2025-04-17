@@ -24,9 +24,7 @@ export function RecipeList() {
     queryFn: fetchMeals,
   });
   const data = qData as {
-    meals:
-      | { idMeal: string; strMeal: string; strMealThumb: string }[]
-      | "no data found";
+    meals: RecipeListDTO[] | "no data found";
   };
   if (isLoading)
     return (
@@ -43,6 +41,7 @@ export function RecipeList() {
     data?.meals?.map((meal) => ({
       title: meal.strMeal,
       src: meal.strMealThumb,
+      idMeal: meal.idMeal,
     })) ?? [];
 
   return (
