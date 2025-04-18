@@ -1,14 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
-import { Loader, PencilIcon } from "lucide-react";
+import { Loader } from "lucide-react";
+import { FeedbackDetailsDialog } from "./feedbackDetailsDialog";
 
 export function FeedbackList() {
   const { data, isLoading, isError } = useQuery<FeedbackListDTO[]>({
     queryKey: ["feedback"],
     queryFn: async () => {
-      const res = await fetch("/api/feedback/all");
+      const res = await fetch("/api/feedback/get_list");
       if (!res.ok) throw new Error("Failed to fetch feedback");
       return res.json();
     },
@@ -47,9 +47,7 @@ export function FeedbackList() {
                 {new Date(feedback.createdAt).toLocaleString()}
               </td>
               <td className="px-3 py-2 border flex justify-center">
-                <Button type="button" variant="icon" size="icon">
-                  <PencilIcon className="size-5" />
-                </Button>
+                <FeedbackDetailsDialog row={feedback} />
               </td>
             </tr>
           ))}

@@ -13,7 +13,7 @@ export function FeedbackForm() {
   const [details, setDetails] = useState({ name: "", email: "", remarks: "" });
   const mutation = useMutation({
     mutationFn: async (data: typeof details) => {
-      const res = await fetch("/api/feedback", {
+      const res = await fetch("/api/feedback/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
