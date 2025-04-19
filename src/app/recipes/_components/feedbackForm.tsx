@@ -8,10 +8,17 @@ import { useMutation } from "@tanstack/react-query";
 import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export function FeedbackForm() {
   const router = useRouter();
-  const [details, setDetails] = useState({ name: "", email: "", remarks: "" });
+  const searchParams = useSearchParams();
+  const [details, setDetails] = useState({
+    recipe: searchParams.get("meal") ?? "",
+    name: "",
+    email: "",
+    remarks: "",
+  });
   const fireConfetti = useConfettiFireworks();
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: typeof details) => {
@@ -63,7 +70,13 @@ export function FeedbackForm() {
           <XIcon className="size-5" />
         </Button>
       </div>
-      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+        <Input
+          name="recipe"
+          label="Recipe"
+          value={details.recipe ?? ""}
+          disabled
+        />
         <Input
           required
           name="name"
@@ -101,6 +114,7 @@ export function FeedbackForm() {
             }))
           }
         />
+        <div className="" />
         <div className="w-full justify-end flex">
           <Button
             variant="icon"

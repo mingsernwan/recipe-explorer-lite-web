@@ -19,6 +19,7 @@ export function FeedbackDetailsDialogContent({
     name: "",
     email: "",
     remarks: "",
+    recipe: "",
   });
   const { data, isLoading } = useQuery({
     queryKey: ["feedbackDetails", row.id],
@@ -34,6 +35,7 @@ export function FeedbackDetailsDialogContent({
         name: data.name,
         email: data.email,
         remarks: data.remarks,
+        recipe: data.recipe,
       }));
     }
   }, [data]);
@@ -71,6 +73,13 @@ export function FeedbackDetailsDialogContent({
       }}
     >
       <div className="grid gap-4 sm:grid-cols-2 grid-cols-1">
+        <Input
+          loading={isLoading}
+          label="Recipe"
+          name="recipe"
+          disabled
+          value={details.recipe ?? ""}
+        />
         <Input
           required
           loading={isLoading}
@@ -111,6 +120,7 @@ export function FeedbackDetailsDialogContent({
             }));
           }}
         />
+        <div className="" />
         <div className="flex w-full justify-end items-end">
           <Button
             size="icon"

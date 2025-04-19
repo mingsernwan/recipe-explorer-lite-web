@@ -3,7 +3,13 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, remarks } = await request.json();
+    const { name, email, remarks, recipe } = await request.json();
+    if (!recipe || typeof recipe !== "string") {
+      return NextResponse.json(
+        { error: "Valid recipe is required" },
+        { status: 400 }
+      );
+    }
     if (!name || typeof name !== "string") {
       return NextResponse.json(
         { error: "Valid name is required" },
@@ -23,7 +29,7 @@ export async function POST(request: NextRequest) {
       );
     }
     const feedback = await prisma.feedback.create({
-      data: { name, email, remarks },
+      data: { recipe, name, email, remarks },
     });
 
     return NextResponse.json(feedback, { status: 201 });

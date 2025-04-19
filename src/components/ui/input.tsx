@@ -17,7 +17,7 @@ export function Input(
       HTMLInputElement
     >
 ) {
-  const { label, loading, ...rest } = props;
+  const { disabled, label, loading, ...rest } = props;
   const titleText = props.title ?? props.label;
 
   return (
@@ -49,8 +49,10 @@ export function Input(
               props.error
                 ? "border-red-300 pr-10 text-destructive"
                 : "border-gray-300 pr-2 text-foreground",
+              disabled ? "bg-gray-200 cursor-default" : "",
               props.className
             )}
+            readOnly={disabled}
             id={`${props.name}-input`}
             title={titleText}
           />
