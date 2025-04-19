@@ -45,13 +45,21 @@ export function FeedbackDetailsDialogContent({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error("Failed to update feedback");
-      return res.json();
+      const responseData = await res.json();
+      if (!res.ok) {
+        throw new Error(responseData.error || "Failed to update feedback");
+      }
+      return responseData;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["feedback"] });
       alert("Feedback updated successfully!");
       onDialogClose();
+    },
+    onError: (error) => {
+      alert(
+        error instanceof Error ? error.message : "An unknown error occurred"
+      );
     },
   });
 
