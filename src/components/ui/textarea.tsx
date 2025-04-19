@@ -35,7 +35,14 @@ export function Textarea(
       )}
       <div className="relative mt-0.5">
         {loading ? (
-          <LoaderIcon className="block h-[30px] w-full" />
+          <div className="relative flex flex-col items-center">
+            <div className="w-full">
+              <Textarea disabled />
+            </div>
+            <LoaderIcon
+              className={`absolute top-2 size-5 animate-spin text-gray-400`}
+            />
+          </div>
         ) : (
           <textarea
             {...rest}

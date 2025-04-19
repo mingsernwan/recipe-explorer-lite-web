@@ -3,7 +3,8 @@ import { FeedbackList } from "./_components/feedbackList";
 export default function Page() {
   return (
     <div className="">
-      Feedback <FeedbackList />
+      <p className="text-xl font-semibold">Feedback</p>
+      <FeedbackList />
     </div>
   );
 }
