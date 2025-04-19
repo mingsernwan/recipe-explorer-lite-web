@@ -63,8 +63,8 @@ export function FeedbackList() {
               <td className="px-3 py-2 border">
                 {new Date(feedback.createdAt).toLocaleString()}
               </td>
-              <td className="px-3 py-2 border flex justify-center">
-                <div className="flex gap-2">
+              <td className="px-3 py-2 border">
+                <div className="flex gap-2 w-full h-full justify-center">
                   <FeedbackDetailsDialog row={feedback} />
                   <Button
                     variant="icon"
