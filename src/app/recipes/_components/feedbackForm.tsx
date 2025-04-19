@@ -18,12 +18,20 @@ export function FeedbackForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error("Failed to submit feedback");
-      return res.json();
+      const responseData = await res.json();
+      if (!res.ok) {
+        throw new Error(responseData.error || "Failed to update feedback");
+      }
+      return responseData;
     },
     onSuccess: () => {
       alert("Thank you for your feedback!");
       router.back();
+    },
+    onError: (error) => {
+      alert(
+        error instanceof Error ? error.message : "An unknown error occurred"
+      );
     },
   });
 
