@@ -46,6 +46,7 @@ export function FeedbackList() {
         <thead>
           <tr className="bg-gray-100">
             <th className="px-3 py-2 border">ID</th>
+            <th className="px-3 py-2 border">Recipe</th>
             <th className="px-3 py-2 border">Name</th>
             <th className="px-3 py-2 border">Email</th>
             <th className="px-3 py-2 border">Remarks</th>
@@ -57,6 +58,7 @@ export function FeedbackList() {
           {data.map((feedback) => (
             <tr key={feedback.id} className="even:bg-gray-50">
               <td className="px-3 py-2 border">{feedback.id}</td>
+              <td className="px-3 py-2 border">{feedback.recipe}</td>
               <td className="px-3 py-2 border">{feedback.name}</td>
               <td className="px-3 py-2 border">{feedback.email}</td>
               <td className="px-3 py-2 border">{feedback.remarks}</td>

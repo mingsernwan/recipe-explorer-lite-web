@@ -67,11 +67,14 @@ export function RecipeDetails() {
       </p>
       <p className="mt-8 font-semibold">Got thoughts? Share it with us!</p>
       <Link
-        href={`/recipes/details/${details.idMeal}/feedback`}
+        href={{
+          pathname: `/recipes/details/${details.idMeal}/feedback`,
+          query: { meal: details.strMeal },
+        }}
         className="cursor-pointer text-blue-600 underline"
       >
         Send Feedback
-      </Link>
+      </Link>{" "}
     </div>
   );
 }
