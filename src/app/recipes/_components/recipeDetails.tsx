@@ -47,7 +47,11 @@ export function RecipeDetails() {
   return (
     <div className="mt-4">
       <picture>
-        <img src={details.strMealThumb} alt="" className="size-80 rounded-lg" />
+        <img
+          src={details.strMealThumb}
+          alt={details.strMeal ?? ""}
+          className="size-80 rounded-lg"
+        />
       </picture>
       <p className="mt-2 text-lg font-semibold underline">{details.strMeal}</p>
       <p className="mt-2 font-semibold">Category:</p>
