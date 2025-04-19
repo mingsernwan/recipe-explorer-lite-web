@@ -6,7 +6,7 @@ import { Loader } from "lucide-react";
 
 const fetchMeals = async () => {
   const res = await fetch(
-    "https://www.themealdb.com/api/json/v1/1/search.php?f=b"
+    "https://www.themealdb.com/api/json/v1/1/search.php?f=a"
   );
   if (!res.ok) {
     alert("Error Fetching Recipes");
