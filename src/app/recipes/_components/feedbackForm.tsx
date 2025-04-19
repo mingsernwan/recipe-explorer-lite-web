@@ -65,6 +65,7 @@ export function FeedbackForm() {
       </div>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
         <Input
+          required
           name="name"
           label="Name"
           value={details.name ?? ""}
@@ -76,6 +77,8 @@ export function FeedbackForm() {
           }
         />
         <Input
+          required
+          type="email"
           name="email"
           label="Email Address"
           value={details.email ?? ""}
@@ -87,6 +90,7 @@ export function FeedbackForm() {
           }
         />
         <Textarea
+          required
           name="remarksFeedback"
           label="Remarks/Feedback"
           value={details.remarks ?? ""}

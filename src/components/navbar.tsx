@@ -3,7 +3,10 @@ import Link from "next/link";
 
 export function NavBar() {
   return (
-    <div className="bg-black h-10 flex flex-row gap-4 items-center px-10">
+    <nav
+      aria-label="Main navigation"
+      className="bg-black h-10 flex flex-row gap-4 items-center px-10"
+    >
       <Link href="/">
         <ChefHatIcon className="size-5 text-white" />
       </Link>
@@ -13,6 +16,6 @@ export function NavBar() {
       <Link className="text-white" href="/feedback">
         Feedback
       </Link>
-    </div>
+    </nav>
   );
 }
