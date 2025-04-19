@@ -3,8 +3,8 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function POST(req: NextRequest) {
-  const { name, email, remarks } = await req.json();
+export async function POST(request: NextRequest) {
+  const { name, email, remarks } = await request.json();
 
   if (!name || !email || !remarks) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
