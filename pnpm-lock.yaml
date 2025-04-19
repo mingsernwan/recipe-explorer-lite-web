@@ -17,6 +17,9 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^5.74.3
     version: 5.74.3(react@19.1.0)
+  canvas-confetti:
+    specifier: ^1.9.3
+    version: 1.9.3
   class-variance-authority:
     specifier: ^0.7.1
     version: 0.7.1
@@ -49,6 +52,9 @@ devDependencies:
   '@tailwindcss/postcss':
     specifier: ^4
     version: 4.1.4
+  '@types/canvas-confetti':
+    specifier: ^1.9.0
+    version: 1.9.0
   '@types/node':
     specifier: ^20
     version: 20.17.30
@@ -1227,6 +1233,10 @@ packages:
     dev: true
     optional: true
 
+  /@types/canvas-confetti@1.9.0:
+    resolution: {integrity: sha512-aBGj/dULrimR1XDZLtG9JwxX1b4HPRF6CX9Yfwh3NvstZEm1ZL7RBnel4keCPSqs1ANRu1u2Aoz9R+VmtjYuTg==}
+    dev: true
+
   /@types/estree@1.0.7:
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
     dev: true
@@ -1728,6 +1738,10 @@ packages:
 
   /caniuse-lite@1.0.30001714:
     resolution: {integrity: sha512-mtgapdwDLSSBnCI3JokHM7oEQBLxiJKVRtg10AxM1AyeiKcM96f0Mkbqeq+1AbiCtvMcHRulAAEMu693JrSWqg==}
+    dev: false
+
+  /canvas-confetti@1.9.3:
+    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
     dev: false
 
   /chalk@4.1.2:

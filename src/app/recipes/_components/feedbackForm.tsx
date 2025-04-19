@@ -1,5 +1,6 @@
 "use client";
 
+import { useConfettiFireworks } from "@/components/hooks";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,6 +12,7 @@ import { useState } from "react";
 export function FeedbackForm() {
   const router = useRouter();
   const [details, setDetails] = useState({ name: "", email: "", remarks: "" });
+  const fireConfetti = useConfettiFireworks();
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: typeof details) => {
       const res = await fetch("/api/feedback/create", {
@@ -25,8 +27,11 @@ export function FeedbackForm() {
       return responseData;
     },
     onSuccess: () => {
+      fireConfetti();
       alert("Thank you for your feedback!");
-      router.back();
+      setTimeout(() => {
+        router.back();
+      }, 500);
     },
     onError: (error) => {
       alert(
