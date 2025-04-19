@@ -64,9 +64,15 @@ export function FeedbackDetailsDialogContent({
   });
 
   return (
-    <div className="">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        mutate(details);
+      }}
+    >
       <div className="grid gap-4 sm:grid-cols-2 grid-cols-1">
         <Input
+          required
           loading={isLoading}
           label="Name"
           name="name"
@@ -79,6 +85,8 @@ export function FeedbackDetailsDialogContent({
           }}
         />
         <Input
+          required
+          type="email"
           loading={isLoading}
           label="Email"
           name="email"
@@ -91,6 +99,7 @@ export function FeedbackDetailsDialogContent({
           }}
         />
         <Textarea
+          required
           loading={isLoading}
           label="Remarks/Feedback"
           name="remarksFeedback"
@@ -106,16 +115,13 @@ export function FeedbackDetailsDialogContent({
           <Button
             size="icon"
             variant="icon"
-            type="button"
+            type="submit"
             isLoading={isPending}
-            onClick={() => {
-              mutate(details);
-            }}
           >
             <SaveIcon className="size-5" />
           </Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
