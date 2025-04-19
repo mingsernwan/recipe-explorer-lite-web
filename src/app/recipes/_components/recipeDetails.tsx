@@ -74,7 +74,7 @@ export function RecipeDetails() {
         className="cursor-pointer text-blue-600 underline"
       >
         Send Feedback
-      </Link>{" "}
+      </Link>
     </div>
   );
 }
