@@ -11,7 +11,7 @@ import { useState } from "react";
 export function FeedbackForm() {
   const router = useRouter();
   const [details, setDetails] = useState({ name: "", email: "", remarks: "" });
-  const mutation = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async (data: typeof details) => {
       const res = await fetch("/api/feedback/create", {
         method: "POST",
@@ -31,7 +31,7 @@ export function FeedbackForm() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        mutation.mutate(details);
+        mutate(details);
       }}
     >
       <div className="flex flex-row justify-between">
@@ -89,7 +89,7 @@ export function FeedbackForm() {
             variant="icon"
             size="iconText"
             type="submit"
-            isLoading={mutation.isPending}
+            isLoading={isPending}
           >
             Submit
           </Button>
