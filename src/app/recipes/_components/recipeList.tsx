@@ -1,34 +1,15 @@
 "use client";
 
 import { FocusCards } from "@/components/ui/focus-cards";
-import { useQuery } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
-
-const fetchMeals = async () => {
-  const res = await fetch(
-    "https://www.themealdb.com/api/json/v1/1/search.php?f=b"
-  );
-  if (!res.ok) {
-    alert("Error Fetching Recipes");
-  }
-  return res.json();
-};
+import { useRecipeList } from "./hooks";
 
 export function RecipeList() {
-  const {
-    data: qData,
-    error,
-    isLoading,
-  } = useQuery({
-    queryKey: ["meals"],
-    queryFn: fetchMeals,
-  });
-  const data = qData as {
-    meals: RecipeListDTO[] | "no data found";
-  };
+  const { LetterButtons, data, error, isLoading } = useRecipeList();
   if (isLoading)
     return (
-      <div className="mt-4 flex items-center">
+      <div className="mt-4">
+        <LetterButtons />
         <p className="">Loading recipes. Stay tuned... </p>
         <Loader className="size-5 animate-spin ml-2" />
       </div>
@@ -36,6 +17,14 @@ export function RecipeList() {
   if (error) return <div>Error: {(error as Error).message}</div>;
   if (data?.meals === "no data found") {
     return <div className="mt-4">No recipes found.</div>;
+  }
+  if (data?.meals === null) {
+    return (
+      <div className="mt-4">
+        <LetterButtons />
+        <p className="">No recipes found.</p>
+      </div>
+    );
   }
   const cards =
     data?.meals?.map((meal) => ({
@@ -46,6 +35,7 @@ export function RecipeList() {
 
   return (
     <div className="mt-4">
+      <LetterButtons />
       <FocusCards cards={cards} />
     </div>
   );
